@@ -1,300 +1,187 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { CheckCircle2 } from "lucide-react"
-import { ExamplesDialog } from "./examples-dialog"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Sparkles, Shield, Award, Clock, CheckCircle2 } from "lucide-react"
 
-type Feature = { text: string; muted?: boolean }
+const ACCENT = "#ff6600"
 
-const ACCENT = "#C6FF3A"
-
-function FeatureItem({ text, muted = false }: Feature) {
+function FeatureItem({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-2">
-      <CheckCircle2 className="mt-0.5 h-4 w-4" style={{ color: ACCENT }} />
-      <span className={`text-sm ${muted ? "text-neutral-300" : "text-neutral-100"}`}>{text}</span>
+      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: ACCENT }} />
+      <span className="text-sm text-neutral-300">{text}</span>
     </li>
   )
 }
 
-type Currency = "INR" | "USD"
-
-const PRICES: Record<Currency, { startup: string; pro: string; premium: string; save: string }> = {
-  INR: {
-    startup: "₹25,000/-",
-    pro: "₹55,000/-",
-    premium: "₹1,70,500/-",
-    save: "Save Flat ₹1,500/-",
-  },
-  USD: {
-    startup: "$299",
-    pro: "$699",
-    premium: "$2,049",
-    save: "Save $20",
-  },
-}
-
-function guessLocalCurrency(): Currency {
-  const lang = typeof navigator !== "undefined" ? navigator.language : ""
-  const tz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : ""
-  if (/-(IN|PK|BD)\b/i.test(lang) || /(Kolkata|Karachi|Dhaka)/i.test(tz || "")) return "INR"
-  return "USD"
-}
-
-const startupVideos = [
-  "H1h5dHpp1Nw",
-  "HXARcSSdfMU",
-  "fd8zraQ1JdE",
-  "ARQyF2FA3Ec",
-  "dEZfHADlFtw",
-  "wuyfdfKO6Rc",
-  "VakkmhtrUA0",
-  "o8DoIg9yNGk",
-  "rtReBkFt-To",
-]
-const proVideos = [
-  "ASV2myPRfKA",
-  "eTfS2lqwf6A",
-  "KALbYHmGV4I",
-  "Go0AA9hZ4as",
-  "sB7RZ9QCOAg",
-  "TK2WboJOJaw",
-  "5Xq7UdXXOxI",
-  "kMjWCidQSK0",
-  "RKKdQvwKOhQ",
-]
-const premiumVideos = [
-  "v2AC41dglnM",
-  "pRpeEdMmmQ0",
-  "3AtDnEC4zak",
-  "JRfuAukYTKg",
-  "LsoLEjrDogU",
-  "RB-RcX5DS5A",
-  "hTWKbfoikeg",
-  "YQHsXMglC9A",
-  "09R8_2nJtjg",
-]
-
 export function Pricing() {
-  const [openPlan, setOpenPlan] = useState<null | "Startup" | "Pro" | "Premium">(null)
-  const [currency, setCurrency] = useState<Currency>("USD")
-
-  useEffect(() => {
-    let cancelled = false
-    async function load() {
-      try {
-        const res = await fetch("/api/geo", { cache: "no-store" })
-        if (!res.ok) throw new Error("geo failed")
-        const data = await res.json()
-        if (!cancelled) setCurrency(data?.currency === "INR" ? "INR" : "USD")
-      } catch {
-        if (!cancelled) setCurrency(guessLocalCurrency())
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
   return (
-    <section id="pricing" className="text-white" itemScope itemType="https://schema.org/PriceSpecification">
+    <section id="servicos" className="text-white">
       <div className="container mx-auto px-4 py-16 sm:py-20">
+        {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div
             className="mx-auto mb-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-white"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.6)", border: `1px solid ${ACCENT}` }}
           >
-            Our Pricing and Packages
+            Nossos Serviços
           </div>
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl" itemProp="name">
-            Our Pricing.
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            O que oferecemos.
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-neutral-300" itemProp="description">
-            No hidden fees. Just world-class animation that fits your budget.
+          <p className="mx-auto mt-2 max-w-xl text-sm text-neutral-400">
+            Arte de alta qualidade e procedimentos seguros. Cada trabalho é único e personalizado.
           </p>
           <div className="mt-6">
             <Button
               asChild
-              className="rounded-full px-5 text-neutral-900 hover:brightness-95"
-              style={{ backgroundColor: "#f2f2f2" }}
+              className="rounded-full px-6 text-white hover:brightness-110"
+              style={{ backgroundColor: ACCENT }}
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
-                Contact now
-              </Link>
+              <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+                Agende uma Consulta
+              </a>
             </Button>
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {/* Startup */}
-          <Card
-            className="relative overflow-hidden rounded-2xl liquid-glass shadow-[0_12px_40px_rgba(0,0,0,0.3)] transition-all duration-300"
-            itemScope
-            itemType="https://schema.org/Offer"
-          >
-            <div
-              className="absolute right-4 top-11 rounded-full px-2 py-0.5 text-[10px]"
-              style={{ backgroundColor: "#1f1f1f", color: "#d4d4d4" }}
+        {/* Service Cards */}
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {/* Tatuagem Autoral */}
+          <Card className="relative overflow-hidden rounded-2xl liquid-glass shadow-[0_12px_40px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(255,102,0,0.15)]">
+            <CardHeader className="space-y-3 pb-4">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[#ff6600]/10 p-3 w-fit">
+                <Sparkles className="h-6 w-6 text-[#ff6600]" />
+              </div>
+              <div className="text-xl font-bold text-white">Tatuagem Autoral</div>
+              <p className="text-sm text-neutral-400">
+                Desenhos exclusivos criados especialmente para você
+              </p>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <ul className="grid gap-3">
+                <FeatureItem text="Criação de arte exclusiva e personalizada" />
+                <FeatureItem text="Consulta prévia para entender seu conceito" />
+                <FeatureItem text="Técnicas variadas: realismo, blackwork, fine line" />
+                <FeatureItem text="Tintas de alta qualidade e duradouras" />
+                <FeatureItem text="Ambiente esterilizado e seguro" />
+                <FeatureItem text="Cuidados pós-tattoo inclusos" />
+              </ul>
+              <div className="mt-6">
+                <Button
+                  asChild
+                  className="w-full rounded-full"
+                  style={{ backgroundColor: "#0a0a0a", color: "#ffffff", border: "1px solid #333" }}
+                >
+                  <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+                    Quero minha Tattoo
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Body Piercing */}
+          <Card className="relative overflow-hidden rounded-2xl liquid-glass-enhanced shadow-[0_16px_50px_rgba(0,0,0,0.4)] transition-all duration-300 hover:shadow-[0_16px_50px_rgba(255,102,0,0.2)]">
+            <div 
+              className="absolute top-4 right-4 rounded-full px-2 py-0.5 text-[10px] font-medium"
+              style={{ backgroundColor: ACCENT, color: "#fff" }}
             >
-              {PRICES[currency].save}
+              Popular
             </div>
             <CardHeader className="space-y-3 pb-4">
-              <div className="text-sm font-semibold text-neutral-100" itemProp="name">
-                Startup
+              <div className="inline-flex items-center justify-center rounded-xl bg-[#ff6600]/10 p-3 w-fit">
+                <Shield className="h-6 w-6 text-[#ff6600]" />
               </div>
-              <div className="flex items-end gap-2 text-white">
-                <div className="text-xl font-bold tracking-tight" itemProp="price">
-                  {PRICES[currency].startup}
-                </div>
-                <span className="pb-0.5 text-[11px] text-neutral-300">per video</span>
-                <meta itemProp="priceCurrency" content={currency} />
-              </div>
-              <Button
-                type="button"
-                onClick={() => setOpenPlan("Startup")}
-                onTouchStart={() => setOpenPlan("Startup")}
-                className="w-full rounded-full px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: "#0a0a0a", color: "#ffffff", border: "1px solid #333" }}
-              >
-                View Example
-              </Button>
+              <div className="text-xl font-bold text-white">Body Piercing</div>
+              <p className="text-sm text-neutral-400">
+                Perfurações profissionais com máxima segurança
+              </p>
             </CardHeader>
             <CardContent className="pt-0">
-              <ul className="grid gap-2" itemProp="description">
-                {[
-                  "10–15s Reel/Teaser (1 SKU)",
-                  "Simple background + lighting",
-                  "1 revision",
-                  "Delivered in 10 days",
-                  "Social reel/ad-ready visuals",
-                  "3D Modelling - Included",
-                ].map((f, i) => (
-                  <FeatureItem key={i} text={f} />
-                ))}
+              <ul className="grid gap-3">
+                <FeatureItem text="Perfuração com agulhas descartáveis" />
+                <FeatureItem text="Joias de primeira aplicação inclusas" />
+                <FeatureItem text="Técnicas para todas as regiões do corpo" />
+                <FeatureItem text="Procedimento rápido e indolor" />
+                <FeatureItem text="Materiais 100% esterilizados" />
+                <FeatureItem text="Acompanhamento da cicatrização" />
               </ul>
+              <div className="mt-6">
+                <Button
+                  asChild
+                  className="w-full rounded-full text-white"
+                  style={{ backgroundColor: ACCENT }}
+                >
+                  <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+                    Agendar Piercing
+                  </a>
+                </Button>
+              </div>
             </CardContent>
-            <CardFooter />
           </Card>
 
-          {/* Pro */}
-          <Card
-            className="relative overflow-hidden rounded-2xl liquid-glass shadow-[0_12px_40px_rgba(0,0,0,0.3)] transition-all duration-300"
-            itemScope
-            itemType="https://schema.org/Offer"
-          >
+          {/* Joias de Titânio */}
+          <Card className="relative overflow-hidden rounded-2xl liquid-glass shadow-[0_12px_40px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(255,102,0,0.15)]">
             <CardHeader className="space-y-3 pb-4">
-              <div className="text-sm font-semibold text-neutral-100" itemProp="name">
-                Pro
+              <div className="inline-flex items-center justify-center rounded-xl bg-[#ff6600]/10 p-3 w-fit">
+                <Award className="h-6 w-6 text-[#ff6600]" />
               </div>
-              <div className="flex items-end gap-2 text-white">
-                <div className="text-xl font-bold tracking-tight" itemProp="price">
-                  {PRICES[currency].pro}
-                </div>
-                <span className="pb-0.5 text-[11px] text-neutral-300">per video</span>
-                <meta itemProp="priceCurrency" content={currency} />
-              </div>
-              <Button
-                type="button"
-                onClick={() => setOpenPlan("Pro")}
-                onTouchStart={() => setOpenPlan("Pro")}
-                className="w-full rounded-full px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: "#0a0a0a", color: "#ffffff", border: "1px solid #333" }}
-              >
-                View Example
-              </Button>
+              <div className="text-xl font-bold text-white">Joias de Titânio</div>
+              <p className="text-sm text-neutral-400">
+                Peças premium para seu conforto e estilo
+              </p>
             </CardHeader>
             <CardContent className="pt-0">
-              <ul className="grid gap-2" itemProp="description">
-                {[
-                  "20–25s Animation (1 SKU)",
-                  "Fixed Shot-list (no surprises)",
-                  "Creative background + pro graphics",
-                  "2 structured revisions",
-                  "Delivered in 3 weeks",
-                  "3D Modelling - Included",
-                ].map((f, i) => (
-                  <FeatureItem key={i} text={f} />
-                ))}
+              <ul className="grid gap-3">
+                <FeatureItem text="Titânio implant grade ASTM F136" />
+                <FeatureItem text="100% hipoalergênico" />
+                <FeatureItem text="Variedade de designs e acabamentos" />
+                <FeatureItem text="Opções com pedras e cristais" />
+                <FeatureItem text="Ideal para peles sensíveis" />
+                <FeatureItem text="Garantia de qualidade" />
               </ul>
-            </CardContent>
-            <CardFooter />
-          </Card>
-
-          {/* Premium */}
-          <Card
-            className="relative overflow-hidden rounded-2xl liquid-glass-enhanced shadow-[0_16px_50px_rgba(0,0,0,0.4)] transition-all duration-300"
-            itemScope
-            itemType="https://schema.org/Offer"
-          >
-            <CardHeader className="relative space-y-3 pb-4">
-              <div className="text-sm font-semibold text-neutral-100" itemProp="name">
-                Premium
+              <div className="mt-6">
+                <Button
+                  asChild
+                  className="w-full rounded-full"
+                  style={{ backgroundColor: "#0a0a0a", color: "#ffffff", border: "1px solid #333" }}
+                >
+                  <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+                    Ver Catálogo
+                  </a>
+                </Button>
               </div>
-              <div className="flex items-end gap-2 text-white">
-                <div className="text-xl font-bold tracking-tight" itemProp="price">
-                  {PRICES[currency].premium}
-                </div>
-                <span className="pb-0.5 text-[11px] text-neutral-300">per video</span>
-                <meta itemProp="priceCurrency" content={currency} />
-              </div>
-              <Button
-                type="button"
-                onClick={() => setOpenPlan("Premium")}
-                onTouchStart={() => setOpenPlan("Premium")}
-                className="w-full rounded-full px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: "#0a0a0a", color: "#ffffff", border: "1px solid #333" }}
-              >
-                View Example
-              </Button>
-            </CardHeader>
-            <CardContent className="relative pt-0">
-              <ul className="grid gap-2" itemProp="description">
-                {[
-                  "30–40s Animation (up to 5 SKUs)",
-                  "Advanced storyboard + shot design",
-                  "Delivered in 4 week",
-                  "Lighting, Camera Animation, Depth effects",
-                  "Up to 3 structured revisions",
-                  "3D Modelling - Included",
-                ].map((f, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4" style={{ color: ACCENT }} />
-                    <span className="text-sm text-neutral-100">{f}</span>
-                  </li>
-                ))}
-              </ul>
             </CardContent>
-            <CardFooter />
           </Card>
         </div>
-      </div>
 
-      {/* Modals */}
-      <ExamplesDialog
-        open={openPlan === "Startup"}
-        onOpenChange={(v) => setOpenPlan(v ? "Startup" : null)}
-        planName="Startup Plan"
-        price={PRICES[currency].startup}
-        videoIds={startupVideos}
-      />
-      <ExamplesDialog
-        open={openPlan === "Pro"}
-        onOpenChange={(v) => setOpenPlan(v ? "Pro" : null)}
-        planName="Pro Plan"
-        price={PRICES[currency].pro}
-        videoIds={proVideos}
-      />
-      <ExamplesDialog
-        open={openPlan === "Premium"}
-        onOpenChange={(v) => setOpenPlan(v ? "Premium" : null)}
-        planName="Premium Plan"
-        price={PRICES[currency].premium}
-        videoIds={premiumVideos}
-      />
+        {/* Info Box */}
+        <div className="mt-12 rounded-2xl liquid-glass p-6 sm:p-8">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+            <div className="inline-flex items-center justify-center rounded-xl bg-[#ff6600]/10 p-4">
+              <Clock className="h-8 w-8 text-[#ff6600]" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">Primeira vez?</h3>
+              <p className="mt-1 text-sm text-neutral-400">
+                Agende uma consulta gratuita para conversar sobre seu projeto. 
+                Sem compromisso, sem pressão. Vamos criar algo incrível juntos.
+              </p>
+            </div>
+            <Button
+              asChild
+              className="shrink-0 rounded-full px-6"
+              style={{ backgroundColor: ACCENT, color: "#fff" }}
+            >
+              <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+                Consulta Grátis
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

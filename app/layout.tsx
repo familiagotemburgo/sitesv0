@@ -11,9 +11,9 @@ import { Analytics } from "@vercel/analytics/react"
 const inter = Inter({ subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
-  title: "Skitbit | 3D Animation Made Simple, Reliable & Scalable",
+  title: "Crânio Tattoo | Arte Autoral & Piercing de Elite",
   description:
-    "From product launches to full-scale campaigns, Skitbit delivers 3D animation that's fast, consistent, and built to wow your audience.",
+    "Estúdio de tatuagem autoral e piercing profissional. Arte exclusiva, joias de titânio e técnicas avançadas para quem busca excelência.",
   generator: "v0.app",
 }
 
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="pt-BR" className={inter.className}>
       <head>
         <meta
           name="viewport"
@@ -82,8 +82,8 @@ export default function RootLayout({
       </head>
       <body>
         <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-black">
-            <Plasma color="#8b5cf6" speed={0.8} direction="forward" scale={1.5} opacity={0.4} mouseInteractive={true} />
+          <div className="fixed inset-0 z-0 bg-[#050505]">
+            <Plasma color="#ff6600" speed={0.6} direction="forward" scale={1.8} opacity={0.25} mouseInteractive={true} />
           </div>
           <div className="relative z-10">{children}</div>
         </Suspense>
