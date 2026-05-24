@@ -3,8 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import Image from "next/image"
-import { Menu, Tag, HelpCircle, FileText, Info, ChevronDown, Building2, Package } from "lucide-react"
+import { Menu, Tag, HelpCircle, FileText, Info, ChevronDown, Building2, Package, Skull } from "lucide-react"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -53,8 +52,8 @@ export function SiteHeader() {
         <div className="flex h-14 items-center justify-between px-6 liquid-glass-header rounded-full">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-1.5">
-            <Image src="/icons/skitbit-white.svg" alt="Skitbit logo" width={20} height={20} className="h-5 w-5" />
-            <span className="font-semibold tracking-wide text-white">Skitbit</span>
+            <Skull className="h-5 w-5 text-lime-300" />
+            <span className="font-semibold tracking-wide text-white">Studio</span>
           </Link>
 
           {/* Desktop Nav with Services Dropdown */}
@@ -133,8 +132,8 @@ export function SiteHeader() {
               <SheetContent side="right" className="liquid-glass border-gray-800 p-0 w-64 flex flex-col">
                 {/* Brand Header */}
                 <div className="flex items-center gap-1.5 px-4 py-4 border-b border-gray-800">
-                  <Image src="/icons/skitbit-white.svg" alt="Skitbit logo" width={24} height={24} className="h-6 w-6" />
-                  <span className="font-semibold tracking-wide text-white text-lg">Skitbit</span>
+                  <Skull className="h-6 w-6 text-lime-300" />
+                  <span className="font-semibold tracking-wide text-white text-lg">Studio</span>
                 </div>
 
                 {/* Nav Links */}
