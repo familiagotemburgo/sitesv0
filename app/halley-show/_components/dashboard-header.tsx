@@ -9,14 +9,15 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader({ userName, streak }: DashboardHeaderProps) {
   return (
-    <header className="px-4 pt-6 pb-4">
-      {/* Saudação Principal */}
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <p className="text-[#8A8A8A] text-sm mb-1">Bem-vindo de volta</p>
-          <h1 className="text-xl font-bold text-white">
-            Bora pra selva, <span className="text-[#D4AF37]">{userName}</span>!
-          </h1>
+    <header className="px-4 pt-6 pb-2">
+      {/* Top Bar */}
+      <div className="flex items-center justify-between mb-2">
+        {/* Logo / Brand */}
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF8C00] to-[#D4AF37] flex items-center justify-center">
+            <span className="text-black font-black text-sm">H</span>
+          </div>
+          <span className="font-bold text-white text-sm">HALLEY SHOW</span>
         </div>
         
         {/* Streak Badge */}
@@ -26,30 +27,12 @@ export function DashboardHeader({ userName, streak }: DashboardHeaderProps) {
         </div>
       </div>
 
-      {/* Avatares Sofia e Prof. Halley */}
-      <div className="flex items-center gap-3 p-3 rounded-xl bg-[#111111] border border-[#333333]">
-        {/* Avatar Sofia */}
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8962F] flex items-center justify-center text-black font-bold text-sm">
-            S
-          </div>
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[#111111]" />
-        </div>
-        
-        <div className="flex-1">
-          <p className="text-[#E5E5E5] text-sm">
-            <span className="text-[#D4AF37] font-medium">Sofia</span> e{" "}
-            <span className="text-[#FF8C00] font-medium">Prof. Halley</span> estão te esperando!
-          </p>
-        </div>
-
-        {/* Avatar Prof. Halley */}
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF8C00] to-[#CC7000] flex items-center justify-center text-black font-bold text-sm">
-            H
-          </div>
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[#111111]" />
-        </div>
+      {/* Greeting */}
+      <div className="mt-3">
+        <p className="text-[#8A8A8A] text-xs mb-0.5">Bem-vindo de volta</p>
+        <h1 className="text-lg font-bold text-white">
+          Bora pra selva, <span className="text-[#D4AF37]">{userName}</span>!
+        </h1>
       </div>
     </header>
   )

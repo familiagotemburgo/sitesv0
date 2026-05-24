@@ -1,10 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import { DashboardHeader } from "./_components/dashboard-header"
+import { AgentSelector } from "./_components/agent-selector"
+import { SofiaZone } from "./_components/sofia-zone"
+import { HalleyZone } from "./_components/halley-zone"
 import { LevelProgress } from "./_components/level-progress"
 import { AchievementWall } from "./_components/achievement-wall"
 import { WeeklyTracker } from "./_components/weekly-tracker"
 import { TodayWorkoutCTA } from "./_components/today-workout-cta"
+
+type AgentType = "sofia" | "halley" | null
 
 // Mock data - em produção virá do banco de dados
 const mockUser = {
@@ -36,29 +42,69 @@ const mockWeekDays = [
 ]
 
 export default function HalleyShowDashboard() {
+  const [activeAgent, setActiveAgent] = useState<AgentType>(null)
+
   return (
     <main className="min-h-screen bg-halley-black text-white pb-8">
-      {/* Header com Saudação e Avatares */}
+      {/* Header com Saudação */}
       <DashboardHeader userName={mockUser.name} streak={mockUser.streak} />
 
-      {/* Conteúdo Principal */}
-      <div className="px-4 space-y-6 max-w-lg mx-auto">
-        {/* Nível de Leão - Progress Circular */}
-        <LevelProgress
-          level={mockUser.level}
-          levelName={mockUser.levelName}
-          progress={mockUser.progress}
-          totalWorkouts={mockUser.totalWorkouts}
+      {/* Agent Selector - Dual Agents (Sofia & Halley) */}
+      <div className="px-4">
+        <AgentSelector 
+          activeAgent={activeAgent} 
+          onSelectAgent={setActiveAgent}
+          streak={mockUser.streak}
         />
+      </div>
 
-        {/* Mural de Dopamina - Conquistas */}
-        <AchievementWall achievements={mockAchievements} />
+      {/* Conteúdo Dinâmico baseado no Agente Selecionado */}
+      <div className="px-4 max-w-lg mx-auto">
+        {/* Zona da Sofia - Suporte e Atendimento */}
+        {activeAgent === "sofia" && (
+          <SofiaZone userName={mockUser.name} />
+        )}
 
-        {/* Tracker Semanal */}
-        <WeeklyTracker days={mockWeekDays} />
+        {/* Zona do Halley - Treino e Performance */}
+        {activeAgent === "halley" && (
+          <HalleyZone 
+            userName={mockUser.name}
+            level={mockUser.level}
+            levelName={mockUser.levelName}
+            progress={mockUser.progress}
+            streak={mockUser.streak}
+          />
+        )}
 
-        {/* CTA Principal */}
-        <TodayWorkoutCTA />
+        {/* Dashboard Padrão - Quando nenhum agente está selecionado */}
+        {activeAgent === null && (
+          <div className="space-y-6 zone-enter">
+            {/* Hint para selecionar agente */}
+            <div className="text-center py-2">
+              <p className="text-[#8A8A8A] text-xs">
+                Toque em <span className="text-[#22C55E]">Sofia</span> ou{" "}
+                <span className="text-[#FF8C00]">Halley</span> para interagir
+              </p>
+            </div>
+
+            {/* Nível de Leão - Progress Circular */}
+            <LevelProgress
+              level={mockUser.level}
+              levelName={mockUser.levelName}
+              progress={mockUser.progress}
+              totalWorkouts={mockUser.totalWorkouts}
+            />
+
+            {/* Mural de Dopamina - Conquistas */}
+            <AchievementWall achievements={mockAchievements} />
+
+            {/* Tracker Semanal */}
+            <WeeklyTracker days={mockWeekDays} />
+
+            {/* CTA Principal */}
+            <TodayWorkoutCTA />
+          </div>
+        )}
       </div>
     </main>
   )

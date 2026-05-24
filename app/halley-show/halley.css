@@ -155,3 +155,168 @@
   background-size: 200% 100%;
   animation: shine 3s ease-in-out infinite;
 }
+
+/* ============================================
+   DUAL AGENTS SYSTEM - Sofia & Halley
+   ============================================ */
+
+/* Agent Colors */
+:root {
+  --sofia-green: #22C55E;
+  --sofia-green-light: #4ADE80;
+  --sofia-green-dark: #16A34A;
+  --halley-agent-orange: #FF8C00;
+}
+
+/* Avatar Ring Animations */
+@keyframes ring-pulse-sofia {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes ring-pulse-halley {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 140, 0, 0);
+  }
+}
+
+.avatar-ring-sofia {
+  animation: ring-pulse-sofia 2s ease-in-out infinite;
+}
+
+.avatar-ring-halley {
+  animation: ring-pulse-halley 2s ease-in-out infinite;
+}
+
+/* Avatar Selection States */
+.agent-avatar {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.agent-avatar:hover {
+  transform: scale(1.08);
+}
+
+.agent-avatar.active {
+  transform: scale(1.15);
+}
+
+.agent-avatar.inactive {
+  opacity: 0.5;
+  filter: grayscale(30%);
+}
+
+/* Zone Transition */
+@keyframes zone-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zone-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.zone-enter {
+  animation: zone-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.zone-exit {
+  animation: zone-fade-out 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Zone Backgrounds */
+.zone-sofia {
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, transparent 30%);
+}
+
+.zone-halley {
+  background: linear-gradient(180deg, rgba(255, 140, 0, 0.05) 0%, transparent 30%);
+}
+
+/* Glow Effects for Agents */
+.glow-sofia {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+}
+
+.glow-halley-agent {
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.4), 0 0 40px rgba(255, 140, 0, 0.2);
+}
+
+/* Message Bubble Animation */
+@keyframes message-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  50% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.message-bubble {
+  animation: message-pop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Typing Indicator */
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-dot:nth-child(1) { animation: typing-dot 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation: typing-dot 1.2s ease-in-out infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typing-dot 1.2s ease-in-out infinite 0.4s; }
+
+/* Quick Action Buttons */
+.quick-action {
+  transition: all 0.2s ease;
+}
+
+.quick-action:hover {
+  transform: translateY(-2px);
+}
+
+.quick-action:active {
+  transform: translateY(0);
+}
+
+/* Stat Card Micro-interaction */
+@keyframes stat-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.stat-card:hover {
+  animation: stat-bounce 0.3s ease;
+}
