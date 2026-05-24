@@ -1,9 +1,9 @@
-import { SiteHeader } from "@/components/site-header"
-import { Hero } from "@/components/hero"
-import { Features } from "@/components/features"
-import { LogoMarquee } from "@/components/logo-marquee"
-import { Pricing } from "@/components/pricing"
-import { AppverseFooter } from "@/components/appverse-footer"
+import SiteHeader from "@/components/site-header"
+import Hero from "@/components/hero"
+import Features from "@/components/features"
+import LogoMarquee from "@/components/logo-marquee"
+import Pricing from "@/components/pricing"
+import AppverseFooter from "@/components/appverse-footer"
 import Script from "next/script"
 
 // Force static generation for low TTFB
@@ -20,7 +20,7 @@ export default function Page() {
       "Estúdio de tatuagem autoral e piercing profissional. Arte exclusiva, joias de titânio e técnicas avançadas para quem busca excelência.",
     url: "https://craniotattoo.com.br/",
     image: "https://craniotattoo.com.br/logo.png",
-    priceRange: "$$",
+    priceRange: "\(\)",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Brasil",
