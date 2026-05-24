@@ -20,7 +20,7 @@ export default function Page() {
       "Estúdio de tatuagem autoral e piercing profissional. Arte exclusiva, joias de titânio e técnicas avançadas para quem busca excelência.",
     url: "https://craniotattoo.com.br/",
     image: "https://craniotattoo.com.br/logo.png",
-    priceRange: "\(\)",
+    priceRange: "$$",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Brasil",
