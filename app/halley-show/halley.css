@@ -1,0 +1,157 @@
+/* Halley Show - Dark Premium Theme */
+:root {
+  --halley-black: #000000;
+  --halley-black-soft: #0a0a0a;
+  --halley-black-card: #111111;
+  --halley-gold: #D4AF37;
+  --halley-gold-light: #E8C96A;
+  --halley-gold-dark: #B8962F;
+  --halley-orange: #FF8C00;
+  --halley-orange-light: #FFA033;
+  --halley-orange-dark: #CC7000;
+  --halley-white: #FAFAFA;
+  --halley-gray-100: #E5E5E5;
+  --halley-gray-200: #C4C4C4;
+  --halley-gray-300: #8A8A8A;
+  --halley-gray-400: #555555;
+  --halley-gray-500: #333333;
+  --halley-gray-600: #1A1A1A;
+}
+
+.bg-halley-black {
+  background-color: var(--halley-black);
+}
+
+.bg-halley-card {
+  background-color: var(--halley-black-card);
+}
+
+.text-halley-gold {
+  color: var(--halley-gold);
+}
+
+.text-halley-orange {
+  color: var(--halley-orange);
+}
+
+.border-halley-gold {
+  border-color: var(--halley-gold);
+}
+
+.border-halley-orange {
+  border-color: var(--halley-orange);
+}
+
+/* Glow Effects */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.3), 0 0 40px rgba(255, 140, 0, 0.1);
+}
+
+.glow-gold-text {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Circular Progress Ring */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+/* Card Hover Effects */
+.halley-card {
+  background: linear-gradient(135deg, var(--halley-black-card) 0%, var(--halley-gray-600) 100%);
+  border: 1px solid var(--halley-gray-500);
+  transition: all 0.3s ease;
+}
+
+.halley-card:hover {
+  border-color: var(--halley-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* Achievement Badge */
+.achievement-badge {
+  background: linear-gradient(135deg, var(--halley-gold-dark) 0%, var(--halley-gold) 50%, var(--halley-gold-light) 100%);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* CTA Button */
+.halley-cta {
+  background: linear-gradient(135deg, var(--halley-orange-dark) 0%, var(--halley-orange) 50%, var(--halley-orange-light) 100%);
+  box-shadow: 0 4px 20px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.halley-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 140, 0, 0.5);
+}
+
+.halley-cta:active {
+  transform: translateY(0);
+}
+
+/* Week Day Check */
+.day-check {
+  transition: all 0.2s ease;
+}
+
+.day-check.completed {
+  background: linear-gradient(135deg, var(--halley-gold-dark) 0%, var(--halley-gold) 100%);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+/* Scrollbar Styling */
+.halley-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.halley-scrollbar::-webkit-scrollbar-track {
+  background: var(--halley-gray-600);
+}
+
+.halley-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--halley-gold);
+  border-radius: 2px;
+}
+
+/* Animation */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shine-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shine 3s ease-in-out infinite;
+}
